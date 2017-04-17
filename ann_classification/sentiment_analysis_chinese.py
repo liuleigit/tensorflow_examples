@@ -7,6 +7,7 @@ import pickle
 from collections import Counter
 from sklearn.feature_extraction.text import CountVectorizer
 import os
+import traceback
 
 real_dir_path = os.path.split(os.path.realpath(__file__))[0]
 pos_file = os.path.join(real_dir_path, 'data/pos.txt')
@@ -46,4 +47,7 @@ def create_vocab(pos_file, neg_file):
 
 
 if __name__ == '__main__':
-    create_vocab(pos_file, neg_file)
+    try:
+        create_vocab(pos_file, neg_file)
+    except:
+        traceback.print_exc()
