@@ -24,20 +24,21 @@ stop_words_file = os.path.join(real_dir_path, '../util/stopwords.txt')
 #定义允许的词性
 allow_pos_ltp = ('a', 'i', 'j', 'n', 'nh', 'ni', 'nl', 'ns', 'nt', 'nz', 'v', 'ws')
 def create_vocab(pos_file, neg_file):
-    sent = ''
-    def process_file(file):
-        with open(file, 'r') as f:
+    def process_file(file_path):
+        with open(file_path, 'r') as f:
             v = []
             lines = f.readlines()
             for line in lines:
                 words = seg.segment(''.join(line.split()))
                 poses = poser.postag(words)
                 stopwords = {}.fromkeys([line.rstrip() for line in open(stop_words_file)])
+                sentence = []
                 for i, pos in enumerate(poses):
                     if (pos in allow_pos_ltp) and (words[i] not in stopwords):
-                        v.append(words[i])
-            return ' '.join(v)
-    sent += process_file(pos_file)
+                        sentence.append(words[i])
+                v.append(' '.join(sentence))
+            return v
+    sent = process_file(pos_file)
     #sent += process_file(neg_file)
     tf_v = CountVectorizer(max_df=0.9, min_df=1)
     tf = tf_v.fit_transform(sent)
