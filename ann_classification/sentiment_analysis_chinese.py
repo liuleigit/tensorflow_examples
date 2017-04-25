@@ -43,11 +43,11 @@ def create_vocab(pos_file, neg_file):
                 v.append(' '.join(sentence))
             return v
     sent = process_file(pos_file)
-    #sent += process_file(neg_file)
+    sent += process_file(neg_file)
     tf_v = CountVectorizer(max_df=0.9, min_df=1)
     tf = tf_v.fit_transform(sent)
-    print tf_v.vocabulary_
-    return tf_v.vocabulary_
+    #print tf_v.vocabulary_
+    return tf_v.vocabulary_.keys()
 
 #获取词汇
 vocab = create_vocab(pos_file, neg_file)
