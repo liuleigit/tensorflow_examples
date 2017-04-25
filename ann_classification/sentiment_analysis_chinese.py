@@ -155,7 +155,6 @@ def train_neural_network(X, Y):
 train_neural_network(X, Y)
 
 
-
 if __name__ == '__main__':
     try:
         pass
