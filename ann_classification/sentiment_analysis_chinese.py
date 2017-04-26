@@ -84,7 +84,7 @@ dataset = np.array(dataset)
 train_dataset = dataset[:-test_size]
 test_dataset = dataset[-test_size:]
 print 'test_size = {}'.format(test_size)
-print 'size of train_dataset is {}'.format(train_dataset)
+#print 'size of train_dataset is {}'.format(train_dataset)
 
 #Feed-forward nueral network
 #定义每个层有多少个神经元
@@ -145,7 +145,7 @@ def train_neural_network(X, Y):
                 a = list(batch_x)
                 b = list(batch_y)
                 #_, c = session.run([optimizer, cost_func], feed_dict={X:list(batch_x), Y:list(batch_y)})
-                _, c = session.run(optimizer, feed_dict={X:list(batch_x), Y:list(batch_y)})
+                _, c = session.run([optimizer, cost_func], feed_dict={X:list(batch_x), Y:list(batch_y)})
                 epoch_loss += c
                 i = end
             print(epoch, ' : ', epoch_loss)
