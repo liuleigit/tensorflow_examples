@@ -8,8 +8,8 @@ import os
 import traceback
 
 real_dir_path = os.path.split(os.path.realpath(__file__))[0]
-pos_file = os.path.join(real_dir_path, 'data/pos.txt')
-neg_file = os.path.join(real_dir_path, 'data/neg.txt')
+pos_file = os.path.join(real_dir_path, 'data/pos_bak.txt')
+neg_file = os.path.join(real_dir_path, 'data/neg_bak.txt')
 
 #使用哈工大分词和词性标注
 from pyltp import Segmentor, Postagger
@@ -158,7 +158,7 @@ def train_neural_network(X, Y):
         #tf.cast 可以将[True, False, True] 转化为[1, 0, 1]
         #reduce_mean用于在某一维上计算平均值, 未指定纬度则计算所有元素
         accurqcy = tf.reduce_mean(tf.cast(correct, 'float'))
-        print('准确率: ', accurqcy.eval({X:list(test_x), Y:list(test_y)}))
+        print('准确率: {}'.format(accurqcy.eval({X:list(test_x), Y:list(test_y)})))
         #等价: print session.run(accuracy, feed_dict={X:list(test_x), Y:list(test_y)})
 
 train_neural_network(X, Y)
