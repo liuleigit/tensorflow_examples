@@ -43,11 +43,11 @@ def create_vocab(pos_file, neg_file):
                 v.append(' '.join(sentence))
             return v
     sent = process_file(pos_file)
-    #sent += process_file(neg_file)
+    sent += process_file(neg_file)
     tf_v = CountVectorizer(max_df=0.9, min_df=1)
     tf = tf_v.fit_transform(sent)
-    print tf_v.vocabulary_
-    return tf_v.vocabulary_
+    #print tf_v.vocabulary_
+    return tf_v.vocabulary_.keys()
 
 #获取词汇
 vocab = create_vocab(pos_file, neg_file)
@@ -57,11 +57,11 @@ def normalize_dataset(vocab):
     dataset = []
     # vocab:词汇表; review:评论; clf:评论对应的分类, [0, 1]表示负面评论,[1, 0]表示正面
     def string_to_vector(vocab, review, clf):
-        words = cut_stopword_pos(review)
+        words = cut_stopword_pos(review) # list of str
         features = np.zeros(len(vocab))
         for w in words:
-            if w in vocab:
-                features[vocab.index(w)] = 1
+            if w.decode('utf-8') in vocab:
+                features[vocab.index(w.decode('utf-8'))] = 1
         return [features, clf]
     with open(pos_file, 'r') as f:
         lines = f.readlines()
@@ -115,7 +115,7 @@ Y = tf.placeholder('float')
 def train_neural_network(X, Y):
     predict = neural_netword(X)
     #cost func是输出层softmax的cross entropy的平均值。 将softmax 放在此处而非nn中是为了效率.
-    cost_func = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(predict, Y))
+    cost_func = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=predict, labels=Y))
     #设置优化器
     optimizer = tf.train.AdamOptimizer().minimize(cost_func)
 
