@@ -130,6 +130,7 @@ def train_neural_network(X, Y):
         train_y = train_dataset[:, 1] #每一行的label
         for epoch in range(epochs):
             while i < len(train_x):
+                print i
                 start = i
                 end = i + batch_size
 
