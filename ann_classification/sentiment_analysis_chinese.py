@@ -83,6 +83,8 @@ test_size = int(len(dataset) * 0.1)
 dataset = np.array(dataset)
 train_dataset = dataset[:-test_size]
 test_dataset = dataset[-test_size:]
+print 'test_size = {}'.format(test_size)
+print 'size of train_dataset is {}'.format(train_dataset)
 
 #Feed-forward nueral network
 #定义每个层有多少个神经元
@@ -128,6 +130,7 @@ def train_neural_network(X, Y):
         random.shuffle(train_dataset)
         train_x = train_dataset[:, 0] #每一行的features
         train_y = train_dataset[:, 1] #每一行的label
+        print 'size of train_x is {}'.format(len(train_x))
         for epoch in range(epochs):
             while i < len(train_x):
                 print i
