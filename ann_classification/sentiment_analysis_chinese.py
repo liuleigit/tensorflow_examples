@@ -142,6 +142,8 @@ def train_neural_network(X, Y):
                 print 'type of batch_x'
                 print type(batch_x)
                 print type(batch_y)
+                a = list(batch_x)
+                b = list(batch_y)
                 #_, c = session.run([optimizer, cost_func], feed_dict={X:list(batch_x), Y:list(batch_y)})
                 _, c = session.run(optimizer, feed_dict={X:list(batch_x), Y:list(batch_y)})
                 epoch_loss += c
