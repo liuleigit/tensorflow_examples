@@ -8,8 +8,8 @@ import os
 import traceback
 
 real_dir_path = os.path.split(os.path.realpath(__file__))[0]
-pos_file = os.path.join(real_dir_path, 'data/pos_bak.txt')
-neg_file = os.path.join(real_dir_path, 'data/neg_bak.txt')
+pos_file = os.path.join(real_dir_path, 'data/pos.txt')
+neg_file = os.path.join(real_dir_path, 'data/neg.txt')
 
 #使用哈工大分词和词性标注
 from pyltp import Segmentor, Postagger
@@ -102,11 +102,10 @@ def neural_netword(data):
     layer_output_w_b = {'w_':tf.Variable(tf.random_normal([n_layer_2, n_output_layer])), 'b_':tf.Variable(tf.random_normal([n_output_layer]))}
 
     layer_1 = tf.add(tf.matmul(data, layer_1_w_b['w_']), layer_1_w_b['b_'])
-    layer_1 = tf.nn.relu(layer_1)
+    layer_1 = tf.nn.relu(layer_1) #relu做激活函数
     layer_2 = tf.add(tf.matmul(layer_1, layer_2_w_b['w_']), layer_2_w_b['b_'])
     layer_2 = tf.nn.relu(layer_2)
     layer_output = tf.add(tf.matmul(layer_2, layer_output_w_b['w_']), layer_output_w_b['b_'])
-
     return layer_output
 
 batch_size = 50
@@ -121,14 +120,14 @@ def train_neural_network(X, Y):
     #设置优化器
     optimizer = tf.train.AdamOptimizer().minimize(cost_func)
 
-    epochs = 13  #epoch本意是时代、纪, 这里是迭代次数
+    epochs = 13  #epoch本意是时代、纪, 这里是迭代周期
     with tf.Session() as session:
         session.run(tf.initialize_all_variables()) #初始化所有变量,包括w,b
         epoch_loss = 0
 
         i = 0
         random.shuffle(train_dataset)
-        train_x = train_dataset[:, 0] #每一行的features
+        train_x = train_dataset[:, 0] #每一行的features;
         train_y = train_dataset[:, 1] #每一行的label
         print 'size of train_x is {}'.format(len(train_x))
         for epoch in range(epochs):
@@ -139,13 +138,10 @@ def train_neural_network(X, Y):
 
                 batch_x = train_x[start:end]
                 batch_y = train_y[start:end]
-                print 'type of batch_x'
-                print type(batch_x)
-                print type(batch_y)
-                a = list(batch_x)
-                b = list(batch_y)
-                #_, c = session.run([optimizer, cost_func], feed_dict={X:list(batch_x), Y:list(batch_y)})
-                _, c = session.run([optimizer, cost_func], feed_dict={X:list(batch_x), Y:list(batch_y)})
+                #run的第一个参数fetches可以是单个,也可以是多个。 返回值是fetches的返回值。
+                #此处因为要打印cost,所以cost_func也在fetches中
+                _, c = session.run([optimizer, cost_func], feed_dict={X:batch_x, Y:batch_y})
+                print c
                 epoch_loss += c
                 i = end
             print(epoch, ' : ', epoch_loss)
