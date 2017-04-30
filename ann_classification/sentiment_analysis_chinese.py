@@ -140,7 +140,7 @@ def train_neural_network(X, Y):
                 batch_y = train_y[start:end]
                 #run的第一个参数fetches可以是单个,也可以是多个。 返回值是fetches的返回值。
                 #此处因为要打印cost,所以cost_func也在fetches中
-                _, c = session.run([optimizer, cost_func], feed_dict={X:batch_x, Y:batch_y})
+                _, c = session.run([optimizer, cost_func], feed_dict={X:list(batch_x), Y:list(batch_y)})
                 print c
                 epoch_loss += c
                 i = end
