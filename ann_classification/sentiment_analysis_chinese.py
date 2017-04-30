@@ -108,7 +108,7 @@ def neural_netword(data):
     layer_output = tf.add(tf.matmul(layer_2, layer_output_w_b['w_']), layer_output_w_b['b_'])
     return layer_output
 
-batch_size = 50
+batch_size = 2
 X = tf.placeholder('float', [None, n_input_layer])  #None表示样本数量任意; 每个样本纬度是term数量
 Y = tf.placeholder('float')
 
