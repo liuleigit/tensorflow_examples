@@ -125,12 +125,12 @@ def train_neural_network(X, Y):
         session.run(tf.initialize_all_variables()) #初始化所有变量,包括w,b
         epoch_loss = 0
 
-        i = 0
         random.shuffle(train_dataset)
         train_x = train_dataset[:, 0] #每一行的features;
         train_y = train_dataset[:, 1] #每一行的label
         print 'size of train_x is {}'.format(len(train_x))
         for epoch in range(epochs):
+            i = 0
             while i < len(train_x):
                 print i
                 start = i
