@@ -64,7 +64,12 @@ def cut_pos_ltp(doc, filter_pos = True, allow_pos = allow_pos_ltp, remove_tags=T
     if remove_tags:
         soup = BeautifulSoup(s, 'lxml')
         s = soup.get_text()
-    words = segmentor.segment(s)
+    try:
+        words = segmentor.segment(s)
+    except:
+        print type(s)
+        print 's is {}'.format(s)
+        print traceback.print_exc()
 
     words2 = []
     for w in words:
