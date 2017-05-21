@@ -63,7 +63,7 @@ def cut_pos_ltp(doc, filter_pos = True, allow_pos = allow_pos_ltp, remove_tags=T
     s = ''.join(doc.split())  #去除空白符
     if remove_tags:
         soup = BeautifulSoup(s, 'lxml')
-        s = soup.get_text()
+        s = soup.get_text().encode('utf-8')
     try:
         words = segmentor.segment(s)
     except:
