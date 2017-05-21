@@ -178,10 +178,13 @@ def coll_cut_extract_multiprocess(chnl_num_dict,
 
 
 if __name__ == "__main__":
-    chnl_newsnum_dict = {'财经':100000, '互联网':100000, '健康':100000, '军事':100000,
-                         '汽车':100000, '养生':100000, '影视':10000,
-                         '游戏':100000, '育儿':100000, '体育':100000, '娱乐':100000}
-    coll_cut_extract_multiprocess(chnl_newsnum_dict, './data/data_cut')
+    try:
+        chnl_newsnum_dict = {'财经':100000, '互联网':100000, '健康':100000, '军事':100000,
+                             '汽车':100000, '养生':100000, '影视':10000,
+                             '游戏':100000, '育儿':100000, '体育':100000, '娱乐':100000}
+        coll_cut_extract_multiprocess(chnl_newsnum_dict, './data/data_cut')
+    except:
+        traceback.print_exc()
 
 
 
