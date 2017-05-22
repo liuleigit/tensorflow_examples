@@ -7,7 +7,7 @@
 import pandas as pd
 from gensim.models import Word2Vec
 #df = pd.read_csv('./data/data_cut/data_cut.csv')
-df = pd.read_csv('./data/data_cut/体育.csv')
+df = pd.read_csv('./data/data_cut/体育_cut.csv')
 sentences = df['doc']
 print type(sentences)
 print sentences.tolist()[0]
