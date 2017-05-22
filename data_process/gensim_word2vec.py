@@ -13,7 +13,7 @@ print type(sentences)
 #print sentences.tolist()[0]
 sentences = [i.decode('utf-8') for i in sentences.tolist()]
 
-model = Word2Vec(sentences.tolist(), size=300, window=5, min_count=10, workers=10)
+model = Word2Vec(sentences, size=300, window=5, min_count=10, workers=10)
 model.save('./word2vec_model')
 model = Word2Vec.load('word2vec_model')
 print model.similarity(u"刘国梁", u"张继科")
