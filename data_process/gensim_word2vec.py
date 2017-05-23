@@ -44,7 +44,7 @@ model.save('./word2vec.model')
 for i in model.vocab.keys():
     print i
 #model = Word2Vec.load('word2vec_model')
-print model.wv[u'中超']
+print model.wv[u'球员']
 '''
 print model.wv[u'主场']
 print model.similarity(u"刘国梁", u"张继科")
