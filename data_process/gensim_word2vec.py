@@ -18,6 +18,9 @@ model = Word2Vec(LineSentence('./data/data_cut/test'), size=300, window=5, min_c
 model.save('./word2vec.model')
 print model.vocab
 print type(model.vocab)
+for i in model.vocab.keys():
+    print type(i)
+    print i
 #model = Word2Vec.load('word2vec_model')
 #print model.wv[u'篮球']
 '''
