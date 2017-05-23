@@ -8,13 +8,14 @@ import pandas as pd
 from gensim.models import Word2Vec
 from gensim.models.word2vec import LineSentence
 #df = pd.read_csv('./data/data_cut/data_cut.csv')
-#df = pd.read_csv('./data/data_cut/test')
-##sentences = df['doc']
+df = pd.read_csv('./data/data_cut/test')
+sentences = df['doc']
 #print type(sentences)
 #print sentences.tolist()[0]
-#sentences = [i.decode('utf-8') for i in sentences.tolist()]
+sentences = [i.decode('utf-8') for i in sentences.tolist()]
 
-model = Word2Vec(LineSentence('./data/data_cut/test'), size=300, window=5, min_count=1, workers=2)
+#model = Word2Vec(LineSentence('./data/data_cut/test'), size=300, window=5, min_count=1, workers=2)
+model = Word2Vec(sentences, size=300, window=5, min_count=1, workers=2)
 model.save('./word2vec.model')
 print model.vocab
 print type(model.vocab)
