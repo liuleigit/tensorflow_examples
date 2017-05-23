@@ -8,47 +8,20 @@ import pandas as pd
 from gensim.models import Word2Vec
 from gensim.models.word2vec import LineSentence
 
-class TextLoader(object):
-    def __init__(self):
-        pass
-
-    def __iter__(self):
-        input = open('./data/data_cut/test','r')
-        line = str(input.readline())
-        while line != None and len(line) > 4:
-            # print line
-            segments = line.split(' ')
-            yield segments
-            line = str(input.readline())
-
-
-tl = TextLoader()
-print type(tl)
-#df = pd.read_csv('./data/data_cut/data_cut.csv')
-df = pd.read_csv('./data/data_cut/test')
+df = pd.read_csv('./data/data_cut/data_cut.csv')
+#df = pd.read_csv('./data/data_cut/test')
 sentences = df['doc']
-#print type(sentences)
-#print sentences.tolist()[0]
-#sentences = [i.decode('utf-8') for i in sentences.tolist()]
 line_sent = []
 for s in sentences:
-    line_sent.append(s.split())
+    line_sent.append(s.decode('utf-8').split())
 
-ll = LineSentence('./data/data_cut/test')
-print ll
-
-#model = Word2Vec(LineSentence('./data/data_cut/体育_cut.csv'), size=300, window=5, min_count=1, workers=2)
-model = Word2Vec(line_sent, size=300, window=5, min_count=1, workers=2)
-#model = Word2Vec(sentences, size=300, window=5, min_count=1, workers=2)  #error. 把每个字都分开了
+print 'begin to train. size of sentencts is {} '.format(len(line_sent))
+model = Word2Vec(line_sent, size=300, window=5, min_count=5, workers=10)
+print 'finish to train word2vec!'
 model.save('./word2vec.model')
-for i in model.vocab.keys():
-    print type(i)
-    print i
-#model = Word2Vec.load('word2vec_model')
-print model.wv['球员']
-'''
-print model.wv[u'主场']
-print model.similarity(u"刘国梁", u"张继科")
-print model.wv[u'张继科']
-print model.wv[u'篮板']
-'''
+print model.vector_size
+i = 0
+for v in model.vocab.keys():
+    i += 1
+    print v
+print model.vocab[u'欧冠']
