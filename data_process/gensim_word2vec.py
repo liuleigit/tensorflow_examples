@@ -17,6 +17,8 @@ line_sent = []
 for s in sentences:
     line_sent.append(s.split())
 
+ll = LineSentence('./data/data_cut/test')
+print ll
 
 #model = Word2Vec(LineSentence('./data/data_cut/体育_cut.csv'), size=300, window=5, min_count=1, workers=2)
 model = Word2Vec(line_sent, size=300, window=5, min_count=1, workers=2)
