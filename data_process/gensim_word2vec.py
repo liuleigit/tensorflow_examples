@@ -12,8 +12,15 @@ df = pd.read_csv('./data/data_cut/data_cut.csv')
 #df = pd.read_csv('./data/data_cut/test')
 sentences = df['doc']
 line_sent = []
+k = 0
 for s in sentences:
-    line_sent.append(s.decode('utf-8').split())
+    k += 1
+    try:
+        line_sent.append(s.decode('utf-8').split())
+    except:
+        print k
+        print s
+
 
 print 'begin to train. size of sentencts is {} '.format(len(line_sent))
 model = Word2Vec(line_sent, size=300, window=5, min_count=2, workers=10)
