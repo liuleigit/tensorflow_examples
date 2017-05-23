@@ -16,12 +16,15 @@ for s in sentences:
     line_sent.append(s.decode('utf-8').split())
 
 print 'begin to train. size of sentencts is {} '.format(len(line_sent))
-model = Word2Vec(line_sent, size=300, window=5, min_count=5, workers=10)
+model = Word2Vec(line_sent, size=300, window=5, min_count=2, workers=10)
 print 'finish to train word2vec!'
 model.save('./word2vec.model')
-print model.vector_size
+print 'word size is {}'.format(model.vector_size)
+print '-----------'
 i = 0
 for v in model.vocab.keys():
     i += 1
     print v
-print model.vocab[u'欧冠']
+    if i >=10:
+        break
+print model.wv[u'欧冠']
