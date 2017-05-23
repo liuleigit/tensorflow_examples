@@ -42,9 +42,10 @@ model = Word2Vec(tl, size=300, window=5, min_count=1, workers=2)
 #model = Word2Vec(sentences, size=300, window=5, min_count=1, workers=2)  #error. 把每个字都分开了
 model.save('./word2vec.model')
 for i in model.vocab.keys():
+    print type(i)
     print i
 #model = Word2Vec.load('word2vec_model')
-print model.wv[u'球员']
+print model.wv['球员']
 '''
 print model.wv[u'主场']
 print model.similarity(u"刘国梁", u"张继科")
