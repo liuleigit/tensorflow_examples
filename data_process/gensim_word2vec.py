@@ -22,7 +22,7 @@ for i in model.vocab.keys():
     print type(i)
     print i
 #model = Word2Vec.load('word2vec_model')
-#print model.wv[u'篮球']
+print model.wv[u'主场']
 '''
 print model.similarity(u"刘国梁", u"张继科")
 print model.wv[u'张继科']
