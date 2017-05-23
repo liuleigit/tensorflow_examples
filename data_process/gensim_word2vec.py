@@ -12,22 +12,21 @@ df = pd.read_csv('./data/data_cut/test')
 sentences = df['doc']
 #print type(sentences)
 #print sentences.tolist()[0]
-sentences = [i.decode('utf-8') for i in sentences.tolist()]
+#sentences = [i.decode('utf-8') for i in sentences.tolist()]
+line_sent = []
+for s in sentences:
+    line_sent.append(s.split())
 
-#model = Word2Vec(LineSentence('./data/data_cut/test'), size=300, window=5, min_count=1, workers=2)
-model = Word2Vec(sentences, size=300, window=5, min_count=1, workers=2)
+
+#model = Word2Vec(LineSentence('./data/data_cut/体育_cut.csv'), size=300, window=5, min_count=1, workers=2)
+model = Word2Vec(line_sent, size=300, window=5, min_count=1, workers=2)
+#model = Word2Vec(sentences, size=300, window=5, min_count=1, workers=2)  #error. 把每个字都分开了
 model.save('./word2vec.model')
-print model.vocab
-print type(model.vocab)
-for i in model.vocab.keys():
-    print type(i)
-    print i
 #model = Word2Vec.load('word2vec_model')
-print model.wv[u'主场']
+print model.wv[u'中超']
 '''
+print model.wv[u'主场']
 print model.similarity(u"刘国梁", u"张继科")
 print model.wv[u'张继科']
-print model.wv['张继科']
 print model.wv[u'篮板']
-print model.wv['篮板']
 '''
