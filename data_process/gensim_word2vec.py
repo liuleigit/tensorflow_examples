@@ -10,6 +10,7 @@ from gensim.models.word2vec import LineSentence
 
 df = pd.read_csv('./data/data_cut/data_cut.csv')
 #df = pd.read_csv('./data/data_cut/test')
+df = df.dropna()
 sentences = df['doc']
 line_sent = []
 k = 0
