@@ -7,6 +7,23 @@
 import pandas as pd
 from gensim.models import Word2Vec
 from gensim.models.word2vec import LineSentence
+
+class TextLoader(object):
+    def __init__(self):
+        pass
+
+    def __iter__(self):
+        input = open('./data/data_cut/test','r')
+        line = str(input.readline())
+        while line != None and len(line) > 4:
+            # print line
+            segments = line.split(' ')
+            yield segments
+            line = str(input.readline())
+
+
+tl = TextLoader()
+print type(tl)
 #df = pd.read_csv('./data/data_cut/data_cut.csv')
 df = pd.read_csv('./data/data_cut/test')
 sentences = df['doc']
