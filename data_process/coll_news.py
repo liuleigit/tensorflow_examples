@@ -158,6 +158,7 @@ def coll_cut_chnal(chname, num, save_dir, cut_save_file):
         docs_series = raw_df['doc']
         docs_series = docs_series.apply(cut_pos_ltp, (True, allow_pos_ltp, False))
         raw_df['doc'] = docs_series
+        raw_df = raw_df.dropna()  #去除空文本的新闻
         raw_df.to_csv(cut_save_file, index=False)
         print '**************{} cut finished! '.format(chname)
     except:
